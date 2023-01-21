@@ -170,15 +170,6 @@ class SiteController extends Controller
     }
 
 
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionRaspisanie()
-    {
-        return $this->render('raspisanie');
-    }
 
     /**
      * Signs user up.

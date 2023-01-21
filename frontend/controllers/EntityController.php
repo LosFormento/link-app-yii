@@ -144,8 +144,11 @@ class EntityController extends Controller
     public function actionView($id)
     {
         $model = $this->findEntity($id);
-        $model->viewsCount++;
-        $model->save(false);
+        if(!Yii::$app->user->isGuest){
+            $model->viewsCount++;
+            $model->save(false);
+        }
+
         return $this->render('view',
             ['model' => $model]
         );

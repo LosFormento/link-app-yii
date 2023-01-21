@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-phone-tab" data-bs-toggle="tab" data-bs-target="#nav-phone" type="button" role="tab" aria-controls="nav-phone" aria-selected="true">По номеру телефона</button>
-            <button class="nav-link" id="nav-esol-tab" data-bs-toggle="tab" data-bs-target="#nav-esol" type="button" role="tab" aria-controls="nav-esol" aria-selected="false">Через аккаунт на esoligorsk.by</button>
             <button class="nav-link" id="nav-social-tab" data-bs-toggle="tab" data-bs-target="#nav-social" type="button" role="tab" aria-controls="nav-social" aria-selected="false">Через Соцсети (Vkontakte, Одноклассники, Google, Facebook и др)</button>
         </div>
     </nav>
@@ -32,15 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
             <div class="form-group">
                 <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-            </div>
-            <?php ActiveForm::end(); ?>
-        </div>
-        <div class="tab-pane fade" id="nav-esol" role="tabpanel" aria-labelledby="nav-esol-tab">
-            <?php $formEmail = ActiveForm::begin(['id' => 'login-email-form']); ?>
-            <?= $formEmail->field($modelEmail, 'username')->textInput(['autofocus' => true]) ?>
-            <?= $formEmail->field($modelEmail, 'password')->passwordInput() ?>
-            <div class="form-group">
-                <?= Html::submitButton('Войти через Esoligorsk', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

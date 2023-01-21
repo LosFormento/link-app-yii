@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 use yii\helpers\Url;
-use yii\widgets\Breadcrumbs;
+use yii\bootstrap5\Breadcrumbs;
 use common\assets\AppAsset;
 use common\widgets\Alert;
 
@@ -29,27 +29,46 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="wrap">
     <header>
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => ['class' => 'navbar-expand-md navbar-dark bg-primary']
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav me-auto'],
+            'items' => [
+                ['label' => Yii::t('main', 'Home'), 'url' => ['/']],
+                ['label' => Yii::t('main', 'About'), 'url' => ['/site/about']],
+                ['label' => Yii::t('main', 'Contact'), 'url' => ['/site/contact']],
+            ]
+        ]);
+        ?>
 
         <?php
-        $topMenuItems = [
-            ['label' => 'Главная', 'url' => ['site/index']],
-            ['label' => 'Новости', 'url' => ['news/index']],
-            ['label' => 'Расписание автобусов', 'url' => ['site/raspisanie']],
-            ['label' => 'Какие-то штуки', 'url' => ['entity/index']],
-        ];
-        echo \common\widgets\esol\TopMenuWidget::widget([
-            'items' => $topMenuItems
-        ]) ?>
+        if (Yii::$app->user->isGuest):?>
+            <a class="btn btn-dark"
+                    href="<?= Url::toRoute('site/login') ?>"><?= Yii::t('main', 'Login') ?></a>
+            <a class="btn btn-dark"
+                    href="<?= Url::toRoute('site/signup') ?>"><?= Yii::t('main', 'Signup') ?></a>
+        <?php else: ?>
+            <?= Html::beginForm(['/site/logout'])
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-dark logout']
+            )
+            . Html::endForm() ?>
+        <?php endif; ?>
+        <?php
+        NavBar::end();
+        ?>
     </header>
     <?php if (isset($this->params['breadcrumbs'])): ?>
-
-
         <div class="container">
             <?= Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
-                'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>'
-
+                //'itemTemplate' => '<li class="breadcrumb-item">{link}</li>',
+                //'activeItemTemplate' => '<li class="breadcrumb-item active">{link}</li>'
             ]) ?>
         </div>
     <?php endif; ?>
@@ -60,20 +79,7 @@ AppAsset::register($this);
     <?php endif; ?>
     <div class="container">
         <?= Alert::widget() ?>
-        <?php if (isset($this->params['leftMenu'])): ?>
-            <div class="row">
-                <div class="col-md-3">
-                    <?php echo \common\widgets\esol\LeftMenuWidget::widget([
-                        'items' => $this->params['leftMenu']
-                    ]); ?>
-                </div>
-                <div class="col-md-9">
-                    <?= $content ?>
-                </div>
-            </div>
-        <?php else: ?>
-            <?= $content ?>
-        <?php endif; ?>
+        <?= $content ?>
     </div>
 </div>
 
