@@ -1,0 +1,41 @@
+### login
+POST http://localhost:22080/v1/auth/login
+Accept:application/json
+Content-Type: application/json
+
+{
+  "phone": "+375 (33) 6653110"
+}
+
+> {% client.global.set("login_message_id", response.body.id); %}
+### check code
+POST http://localhost:22080/v1/auth/code
+Accept:application/json
+Content-Type: application/json
+
+{
+  "id": "{{login_message_id}}",
+  "phoneCode": 11111,
+  "type": 2
+}
+
+### signup
+POST http://localhost:22080/v1/auth/signup
+Accept:application/json
+Content-Type: application/json
+
+{
+  "phone": "+375 (29) 3771564",
+  "name": "Вася теркин"
+}
+> {% client.global.set("signup_message_id", response.body.id); %}
+### check code
+POST http://localhost:22080/v1/auth/code
+Accept:application/json
+Content-Type: application/json
+
+{
+  "id": "{{signup_message_id}}",
+  "phoneCode": 11111,
+  "type": 1
+}

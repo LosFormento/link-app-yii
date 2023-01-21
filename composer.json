@@ -1,0 +1,53 @@
+{
+    "name": "losformento/link-app-yii",
+    "description": "Link app base",
+    "keywords": ["link-app", "api", "advanced", "project template"],
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1.0",
+        "yiisoft/yii2": "~2.0.45",
+        "yiisoft/yii2-bootstrap5": "~2.0.2",
+        "yiisoft/yii2-symfonymailer": "~2.0.3",
+        "vova07/yii2-imperavi-widget": "*",
+        "kartik-v/yii2-widget-fileinput": "*",
+        "kartik-v/yii2-icons": "*",
+        "kartik-v/yii2-grid": "*",
+        "yiisoft/yii2-imagine": "~2.2.0",
+        "kartik-v/yii2-bootstrap5-dropdown":"*",
+        "kreait/firebase-php": "*",
+        "giggsey/libphonenumber-for-php" : "*",
+        "kartik-v/yii2-editors": "dev-master",
+
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "yiisoft/yii2-debug": "~2.1.0",
+        "yiisoft/yii2-gii": "~2.2.0",
+        "yiisoft/yii2-faker": "~2.0.0",
+        "phpunit/phpunit": "~9.5.0",
+        "codeception/codeception": "^5.0.0 || ^4.0",
+        "codeception/lib-innerbrowser": "^3.0 || ^1.1",
+        "codeception/module-asserts": "^3.0 || ^1.1",
+        "codeception/module-yii2": "^1.1",
+        "codeception/module-filesystem": "^3.0 || ^1.1",
+        "codeception/verify": "^2.2",
+        "symfony/browser-kit": "^6.0 || >=2.7 <=4.2.4"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer" : true
+        },
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
