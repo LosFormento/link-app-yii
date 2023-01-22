@@ -24,7 +24,7 @@ if(!empty($model->entityImages)){
         <img class="img-fluid" src="https://via.placeholder.com/<?= EntityImage::THUMB_WIDTH?>x<?=EntityImage::THUMB_HEIGHT?>.png">
     <?php endif;?>
     <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text"><?=$model->preview?></p>
     </div>
 
     <div class="card-body">

@@ -10,7 +10,7 @@ use yii\widgets\ListView;
     <div class="col-12 d-flex justify-content-between">
         <h1>Что-то</h1>
         <div class="align-self-center">
-            <a class="btn btn-success" href="<?=Url::toRoute('create')?>" role="button"><i class="fa-regular fa-add"></i>Добавить</a>
+            <a class="btn btn-success btn-block btn-lg" href="<?=Url::toRoute('create')?>" role="button"><i class="fa-regular fa-add"></i>Добавить</a>
         </div>
     </div>
 </div>

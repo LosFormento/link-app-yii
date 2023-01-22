@@ -17,7 +17,7 @@ class AppAsset extends AssetBundle
         'css/fontawesome/css/all.min.css'
     ];
     public $js = [
-        'js/bootstrap.bundle.min.js'
+        //'js/bootstrap.bundle.min.js'
 
     ];
     public $depends = [

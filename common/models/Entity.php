@@ -3,6 +3,7 @@
 namespace common\models;
 
 
+use common\components\CommonHelpers;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -10,6 +11,7 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\ForbiddenHttpException;
 use yii\web\UploadedFile;
+use yii\helpers\HtmlPurifier;
 
 /**
  * This is the model class for table "task".
@@ -20,6 +22,7 @@ use yii\web\UploadedFile;
  * @property int $viewsCount
  * @property string $title
  * @property string $body
+ * @property string $preview
  * @property int $status
  * @property int $entity_type
  * @property string $date_created
@@ -34,13 +37,10 @@ use yii\web\UploadedFile;
  */
 class Entity extends ActiveRecord
 {
-    const MAXIMUM_IMAGES = 4;
+
     const ENTITY_TYPE = 1;
     const STATUS_ACTIVE = 1;
-
-
     public $images;
-
 
     public function behaviors()
     {
@@ -84,6 +84,11 @@ class Entity extends ActiveRecord
         $this->images = UploadedFile::getInstances($this, 'images');
         $this->status = self::STATUS_ACTIVE;
         $this->entity_type = self::ENTITY_TYPE;
+
+        $this->body = HtmlPurifier::process($this->body,
+            ['HTML.Allowed'=>'b,i,u,p,ul,li,ol']
+        );
+        $this->preview = CommonHelpers::generatePriview($this->body);
         if (count($this->entityImages) + count($this->images) > Yii::$app->params['entity.maxFiles']) {
             $this->addError('images', 'Максимальное число файлов не должно превышать ' . Yii::$app->params['entity.maxFiles']);
             return false;
@@ -110,7 +115,7 @@ class Entity extends ActiveRecord
         return [
             [['user_id', 'title', 'category_id'], 'required'],
             [['user_id', 'category_id', 'status','geoZoom'], 'integer'],
-            [['body'], 'string'],
+            [['body','preview'], 'string'],
             [['date_created', 'date_updated'], 'safe'],
             [['title', 'alias'], 'string', 'max' => 255],
             [['alias'], 'unique'],
